@@ -14,6 +14,9 @@ public class StudentMETO implements StudentREPO {
 
     private SessionFactory sessionFactory = Util.getConnection();
 
+
+
+
     @Override
     public void deleteById(Long id) {
         try (Session session = sessionFactory.openSession()) {
