@@ -14,6 +14,7 @@ public class Prezident {
 
     private String name;
 
+
     @OneToOne(mappedBy = "prezident",cascade = CascadeType.ALL)
     private Company company;
 
