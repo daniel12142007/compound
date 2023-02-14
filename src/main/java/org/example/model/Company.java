@@ -19,6 +19,8 @@ public class Company {
         this.name = name;
     }
 
+
+
     public Company() {
 
     }
