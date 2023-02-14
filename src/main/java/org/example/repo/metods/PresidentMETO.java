@@ -11,14 +11,19 @@ public class PresidentMETO {
     private SessionFactory sessionFactory = Util.getConnection();
 
     public void deleteById(Long id) {
-
+try (Session session = sessionFactory.openSession()){
+    session.beginTransaction();
+    Prezident prezident = getById(id);
+    session.delete(prezident);
+    session.getTransaction().commit();
+}
     }
 
     public void deleteAll() {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-//    session.createQuery("delete from"); Student
-//    session.createQuery("delete from "); Course
+//    session.createQuery("delete from Student stundent"); Student
+//    session.createQuery("delete from Course cour"); Course
             session.createQuery("delete from Company c");
             session.createQuery("delete from Prezident p");
             System.out.println("delete all");
@@ -39,7 +44,6 @@ public class PresidentMETO {
             return session.get(Prezident.class, id);
         }
     }
-
 
 
     public List findAll() {
