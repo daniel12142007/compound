@@ -1,6 +1,6 @@
 package org.example.repo;
 
-import org.example.model.Prezident;
+import org.example.repo.metods.model.Prezident;
 
 import java.util.List;
 
@@ -10,7 +10,6 @@ public interface PresidentREPO {
     void saveF(Prezident prezident);
     void updateById(Long id, Prezident phone);
     Prezident getById(Long id);
-    Prezident findById(String name);
     List findAll();
 
 }
