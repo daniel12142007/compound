@@ -1,7 +1,7 @@
 package org.example.repo.metods;
 
 import org.example.configuration.Util;
-import org.example.repo.metods.model.Company;
+import org.example.repo.metods.model.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -12,7 +12,7 @@ public class StudentMETO{
     public void deleteById(Long id) {
         try (Session session = root.openSession()) {
             session.beginTransaction();
-            Company company = getById(id);
+            Student company = getById(id);
             session.delete(company);
             session.getTransaction().commit();
         }
@@ -28,25 +28,25 @@ public class StudentMETO{
         }
     }
 
-    public void saveF(Company company) {
+    public void saveF(Student student) {
         try(Session ss = root.openSession()){
-            ss.save(company);
+            ss.save(student);
         }
     }
 
-    public void updateById(Long id, Company company) {
+    public void updateById(Long id, Student company) {
         try (Session ss = root.openSession()) {
             ss.beginTransaction();
-            Company getById = getById(id);
-            getById.setCompany_name(company.getCompany_name());
+            Student getById = getById(id);
+            getById.setStudent_name(company.getStudent_name());
             ss.saveOrUpdate(getById);
             ss.getTransaction().commit();
         }
     }
 
-    public Company getById(Long id) {
+    public Student getById(Long id) {
         try (Session session = root.openSession()) {
-            return session.get(Company.class, id);
+            return session.get(Student.class, id);
         }
     }
 }
