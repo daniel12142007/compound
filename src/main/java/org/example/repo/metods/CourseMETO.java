@@ -1,10 +1,11 @@
 package org.example.repo.metods;
 
 import org.example.configuration.Util;
-import org.example.repo.metods.model.Company;
 import org.example.repo.metods.model.Course;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import java.util.List;
 
 
 public class CourseMETO {
@@ -14,7 +15,7 @@ public class CourseMETO {
     public void deleteById(Long id) {
         try (Session session = root.openSession()) {
             session.beginTransaction();
-            Company company = getById(id);
+            Course company = getById(id);
             session.delete(company);
             session.getTransaction().commit();
         }
@@ -30,25 +31,30 @@ public class CourseMETO {
         }
     }
 
-    public void saveF(Company company) {
+    public void saveF(Course course) {
         try(Session ss = root.openSession()){
-            ss.save(company);
+            ss.save(course);
         }
     }
 
     public void updateById(Long id, Course coursey) {
         try (Session ss = root.openSession()) {
             ss.beginTransaction();
-            Company getById = getById(id);
-            getById.setCompany_name(coursey.getCourse_name());
+            Course getById = getById(id);
+            getById.setCourse_name(coursey.getCourse_name());
             ss.saveOrUpdate(getById);
             ss.getTransaction().commit();
         }
     }
 
-    public Company getById(Long id) {
+    public Course getById(Long id) {
         try (Session session = root.openSession()) {
-            return session.get(Company.class, id);
+            return session.get(Course.class, id);
+        }
+    }
+    public List findAll() {
+        try (Session ss = root.openSession()) {
+            return ss.createQuery("select company from Company company").getResultList();
         }
     }
 }

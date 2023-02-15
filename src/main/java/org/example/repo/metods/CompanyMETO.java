@@ -6,6 +6,8 @@ import org.example.repo.CompanyREPO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.util.List;
+
 public class CompanyMETO implements CompanyREPO {
     public static final SessionFactory root = Util.getConnection();
 
@@ -47,6 +49,11 @@ public class CompanyMETO implements CompanyREPO {
     public Company getById(Long id) {
         try (Session session = root.openSession()) {
             return session.get(Company.class, id);
+        }
+    }
+    public List findAll() {
+        try (Session ss = root.openSession()) {
+            return ss.createQuery("select company from Company company").getResultList();
         }
     }
 }
