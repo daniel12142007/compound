@@ -10,7 +10,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany( cascade = CascadeType.ALL)
-private List<Student>students;
+    private List<Student>students;
     private String course_name;
     public Course() {
     }

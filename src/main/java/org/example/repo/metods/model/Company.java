@@ -10,6 +10,7 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "company_name")
     private String company_name;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "prezident_id")
