@@ -5,6 +5,8 @@ import org.example.repo.metods.model.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.util.List;
+
 public class StudentMETO{
     public static final SessionFactory root = Util.getConnection();
 
@@ -47,6 +49,11 @@ public class StudentMETO{
     public Student getById(Long id) {
         try (Session session = root.openSession()) {
             return session.get(Student.class, id);
+        }
+    }
+    public List findAll() {
+        try (Session ss = root.openSession()) {
+            return ss.createQuery("select company from Student company").getResultList();
         }
     }
 }
