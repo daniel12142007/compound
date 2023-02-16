@@ -5,48 +5,49 @@ import org.example.repo.metods.model.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.util.List;
+
 public class StudentMETO{
-    public static final SessionFactory root = Util.getConnection();
+    private final SessionFactory sessionFactory = Util.getConnection();
 
+    public void save(Student student) {
+        try (Session session = sessionFactory.openSession()) {
+            session.save(student);
+        }
+    }
 
-    public void deleteById(Long id) {
-        try (Session session = root.openSession()) {
-            session.beginTransaction();
-            Student company = getById(id);
-            session.delete(company);
-            session.getTransaction().commit();
+    public List findAll() {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("select s from Student s").getResultList();
+        }
+    }
+
+    public Student getID(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(Student.class, id);
         }
     }
 
     public void deleteAll() {
-        try (Session session = root.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.createQuery("delete from Student st").executeUpdate();
-            session.createQuery("delete from Course sa").executeUpdate();
-            session.createQuery("delete from Company c").executeUpdate();
+            session.createQuery("delete from Student s").executeUpdate();
             session.getTransaction().commit();
         }
     }
 
-    public void saveF(Student student) {
-        try(Session ss = root.openSession()){
-            ss.save(student);
+    public void deleteID(Long idsa) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.createQuery("delete from Student s where id="+idsa).executeUpdate();
+            session.getTransaction().commit();
         }
     }
-
-    public void updateById(Long id, Student company) {
-        try (Session ss = root.openSession()) {
-            ss.beginTransaction();
-            Student getById = getById(id);
-            getById.setStudent_name(company.getStudent_name());
-            ss.saveOrUpdate(getById);
-            ss.getTransaction().commit();
-        }
-    }
-
-    public Student getById(Long id) {
-        try (Session session = root.openSession()) {
-            return session.get(Student.class, id);
+    public void denmid(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.createQuery("delete from Student s where Course.id="+id).executeUpdate();
+            session.getTransaction().commit();
         }
     }
 }

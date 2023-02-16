@@ -8,11 +8,13 @@ public class Prezident {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private long money;
     @OneToOne(mappedBy = "prezident",cascade = CascadeType.ALL)
     private Company company;
 
-    public Prezident(String name) {
+    public Prezident(String name, long money) {
         this.name = name;
+        this.money = money;
     }
 
     public Prezident() {
@@ -48,27 +50,6 @@ public class Prezident {
         return "Prezident{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", company=" + company +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Prezident prezident = (Prezident) o;
-
-        if (id != null ? !id.equals(prezident.id) : prezident.id != null) return false;
-        if (name != null ? !name.equals(prezident.name) : prezident.name != null) return false;
-        return company != null ? company.equals(prezident.company) : prezident.company == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (company != null ? company.hashCode() : 0);
-        return result;
     }
 }

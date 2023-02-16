@@ -1,53 +1,51 @@
 package org.example.repo.metods;
 
 import org.example.configuration.Util;
-import org.example.repo.metods.model.Company;
-import org.example.repo.metods.model.Course;
+import org.example.repo.metods.model.Prezident;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.util.List;
+
 public class PresidentMETO {
-    public static final SessionFactory root = Util.getConnection();
+    private static final SessionFactory sessionFactory = Util.getConnection();
 
+    public void save(Prezident prezident) {
+        try (Session session = sessionFactory.openSession()) {
+            session.save(prezident);
+            System.out.println("save");
+        }
+    }
+    public List findAll() {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("select p from Prezident p").getResultList();
+        }
+    }
 
-    public void deleteById(Long id) {
-        try (Session session = root.openSession()) {
-            session.beginTransaction();
-            Company company = getById(id);
-            session.delete(company);
-            session.getTransaction().commit();
+    public Prezident getID(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(Prezident.class, id);
         }
     }
 
     public void deleteAll() {
-        try (Session session = root.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.createQuery("delete from Student st").executeUpdate();
-            session.createQuery("delete from Course sa").executeUpdate();
-            session.createQuery("delete from Company c").executeUpdate();
+            session.createQuery("delete from Student stud").executeUpdate();
+            session.createQuery("delete from Course cour").executeUpdate();
+            session.createQuery("delete from Company com").executeUpdate();
+            session.createQuery("delete from Prezident p").executeUpdate();
+            System.out.println("delete");
             session.getTransaction().commit();
         }
     }
 
-    public void saveF(Company company) {
-        try(Session ss = root.openSession()){
-            ss.save(company);
-        }
-    }
-
-    public void updateById(Long id, Course coursey) {
-        try (Session ss = root.openSession()) {
-            ss.beginTransaction();
-            Company getById = getById(id);
-            getById.setCompany_name(coursey.getCourse_name());
-            ss.saveOrUpdate(getById);
-            ss.getTransaction().commit();
-        }
-    }
-
-    public Company getById(Long id) {
-        try (Session session = root.openSession()) {
-            return session.get(Company.class, id);
+    public void deleteID(Long ids) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Prezident prezident = getID(ids);
+            session.delete(prezident);
+            session.getTransaction().commit();
         }
     }
 }

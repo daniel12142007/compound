@@ -5,12 +5,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "company")
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String company_name;
+    private String logotip;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "prezident_id")
     private Prezident prezident;
@@ -19,8 +19,9 @@ public class Company {
     private List<Course> courses;
 
 
-    public Company(String company_name) {
+    public Company(String company_name, String logotip) {
         this.company_name = company_name;
+        this.logotip = logotip;
     }
 
     public Company() {
@@ -64,32 +65,30 @@ public class Company {
         return "Company{" +
                 "id=" + id +
                 ", company_name='" + company_name + '\'' +
-                ", prezident=" + prezident +
-                ", courses=" + courses +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Company company = (Company) o;
-
-        if (id != null ? !id.equals(company.id) : company.id != null) return false;
-        if (company_name != null ? !company_name.equals(company.company_name) : company.company_name != null)
-            return false;
-        if (prezident != null ? !prezident.equals(company.prezident) : company.prezident != null) return false;
-        return courses != null ? courses.equals(company.courses) : company.courses == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (company_name != null ? company_name.hashCode() : 0);
-        result = 31 * result + (prezident != null ? prezident.hashCode() : 0);
-        result = 31 * result + (courses != null ? courses.hashCode() : 0);
-        return result;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Company company = (Company) o;
+//
+//        if (id != null ? !id.equals(company.id) : company.id != null) return false;
+//        if (company_name != null ? !company_name.equals(company.company_name) : company.company_name != null)
+//            return false;
+//        if (prezident != null ? !prezident.equals(company.prezident) : company.prezident != null) return false;
+//        return courses != null ? courses.equals(company.courses) : company.courses == null;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = id != null ? id.hashCode() : 0;
+//        result = 31 * result + (company_name != null ? company_name.hashCode() : 0);
+//        result = 31 * result + (prezident != null ? prezident.hashCode() : 0);
+//        result = 31 * result + (courses != null ? courses.hashCode() : 0);
+//        return result;
+//    }
 }
 
