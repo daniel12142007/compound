@@ -1,2 +1,2 @@
 #PEPSI_COLA
-Лучший кривой проект в мире!
+Daniel, Aiken, Sardor
