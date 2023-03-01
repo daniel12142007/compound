@@ -17,7 +17,7 @@ public class Util {
                 .setProperty(Environment.URL, "jdbc:postgresql://localhost:5432/postgres")
                 .setProperty(Environment.USER, "postgres")
                 .setProperty(Environment.PASS, "root")
-                .setProperty(Environment.HBM2DDL_AUTO, "update")
+                .setProperty(Environment.HBM2DDL_AUTO, "create")
                 .setProperty(Environment.SHOW_SQL, "true")
                 .setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL10Dialect")
                 .addAnnotatedClass(Company.class)

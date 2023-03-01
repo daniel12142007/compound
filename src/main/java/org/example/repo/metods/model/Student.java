@@ -1,10 +1,15 @@
 package org.example.repo.metods.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,38 +22,13 @@ public class Student {
     @JoinColumn(name = "course_id")
     private Course course;
 
+    @OneToOne(mappedBy = "studend_id", cascade = CascadeType.ALL)
+    private Password_Student passwordStudent;
+
     public Student(String student_name, String surName, int age) {
         this.student_name = student_name;
         this.surName = surName;
         this.age = age;
-    }
-
-    public Student() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStudent_name() {
-        return student_name;
-    }
-
-    public void setStudent_name(String student_name) {
-        this.student_name = student_name;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
     }
 
     @Override
